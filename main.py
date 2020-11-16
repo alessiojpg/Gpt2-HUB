@@ -434,6 +434,7 @@ def unconditional_samples():
                 print(bcolors.WARNING + "Scegli un'opzione valida!" + bcolors.ENDC)
                 cond_menu()
 
+            input(bcolors.BOLD + '\nPremere INVIO per tornare al menù' + bcolors.ENDC)
             menu()
         elif start == 'X' or start == 'x':
             quit()
@@ -676,39 +677,83 @@ def setup():
         print("/output/ esiste già\n")
 
     print(bcolors.OKBLUE + "~~ set-up virtualenv ~~\n" + bcolors.ENDC)
+    input(bcolors.BOLD + '\nPremere INVIO per continutare' + bcolors.ENDC)
 
     import platform
     if str(platform.system()) == 'Windows':
-        os.system('py -m pip install --upgrade pip')
-        os.system('py -m pip install --user virtualenv')
-        os.system('py -m venv venv')
-        os.system('.\venv\Scripts\activate')
+        os.system(r'py -m pip install --upgrade pip && py -m pip install --user virtualenv && py -m venv venv && .\venv\Scripts\activate')
     elif str(platform.system()) == 'Linux' or str(platform.system()) == 'Darwin':
         os.system('python3 -m pip install --upgrade pip && python3 -m pip install --user virtualenv && python3 -m venv venv && source venv/bin/activate')
     else:
         pass
 
+    print(bcolors.OKBLUE + "~~ clonazione repository gpt-2 ~~\n" + bcolors.ENDC)
     input(bcolors.BOLD + '\nPremere INVIO per continutare' + bcolors.ENDC)
 
-    print(bcolors.OKBLUE + "~~ clonazione repository gpt-2 ~~\n" + bcolors.ENDC)
     os.system('git clone https://github.com/alessiojpg/gpt-2-MOD.git gpt-2')
     os.chdir('gpt-2')
     print(bcolors.OKBLUE + "~~ installo tensorflow 1.12 ~~\n" + bcolors.ENDC)
-    os.system('source ../venv/bin/activate && pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.12.0-py3-none-any.whl && deactivate')
+    if str(platform.system()) == 'Windows':
+        os.system(r'..\venv\Scripts\activate && pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.12.0-py3-none-any.whl && deactivate')
+    elif str(platform.system()) == 'Linux':
+        os.system('source ../venv/bin/activate && pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.12.0-py3-none-any.whl && deactivate')
+    elif str(platform.system()) == 'Darwin':
+        os.system('source ../venv/bin/activate && pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.12.0-py3-none-any.whl && deactivate')
+    else:
+        pass
+
     print(bcolors.OKBLUE + "~~ installo requirements ~~\n" + bcolors.ENDC)
-    os.system('source ../venv/bin/activate && pip3 install -r requirements.txt && deactivate')
+    input(bcolors.BOLD + '\nPremere INVIO per continutare' + bcolors.ENDC)
+
+    if str(platform.system()) == 'Windows':
+        os.system(r'..\venv\Scripts\activate && pip3 install -r requirements.txt && deactivate')
+    elif str(platform.system()) == 'Linux':
+        os.system('source ../venv/bin/activate && pip3 install -r requirements.txt && deactivate')
+    elif str(platform.system()) == 'Darwin':
+        os.system('source ../venv/bin/activate && pip3 install -r requirements.txt && deactivate')
+    else:
+        pass
+
 
     def modelmenu():
         print(bcolors.FAIL + "Quale Model scaricare?" + bcolors.ENDC + "\n\n(1) - 124M\n(2) - 355M\n(3) - 774M\n(4) - 1558M\n\n")
         model = input('>> ')
         if model == str(1):
-            os.system('python3 download_model.py 124M')
+            if str(platform.system()) == 'Windows':
+                os.system('py download_model.py 124M')
+            elif str(platform.system()) == 'Linux':
+                os.system('python3 download_model.py 124M')
+            elif str(platform.system()) == 'Darwin':
+                os.system('python3 download_model.py 124M')
+            else:
+                pass
         elif model == str(2):
-            os.system('python3 download_model.py 355M')
+            if str(platform.system()) == 'Windows':
+                os.system('py download_model.py 355M')
+            elif str(platform.system()) == 'Linux':
+                os.system('python3 download_model.py 355M')
+            elif str(platform.system()) == 'Darwin':
+                os.system('python3 download_model.py 355M')
+            else:
+                pass
         elif model == str(3):
-            os.system('python3 download_model.py 774M')
+            if str(platform.system()) == 'Windows':
+                os.system('py download_model.py 774M')
+            elif str(platform.system()) == 'Linux':
+                os.system('python3 download_model.py 774M')
+            elif str(platform.system()) == 'Darwin':
+                os.system('python3 download_model.py 774M')
+            else:
+                pass
         elif model == str(4):
-            os.system('python3 download_model.py 1558M')
+            if str(platform.system()) == 'Windows':
+                os.system('py download_model.py 1558M')
+            elif str(platform.system()) == 'Linux':
+                os.system('python3 download_model.py 1558M')
+            elif str(platform.system()) == 'Darwin':
+                os.system('python3 download_model.py 1558M')
+            else:
+                pass
         else:
             print(bcolors.WARNING + "Scegli un'opzione valida!" + bcolors.ENDC)
             modelmenu()
